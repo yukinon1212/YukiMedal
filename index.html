@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#1a1a2e" />
+    <meta name="description" content="ローグライク × プッシャー式メダル落としゲーム" />
+    <link rel="icon" type="image/png" href="/YukiMedal/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/YukiMedal/icons/icon-192.png" />
+    <title>YukiMedal</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #1a1a2e;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #app {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      canvas {
+        display: block;
+      }
+      #ui-root {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        font-family: 'Courier New', monospace;
+        color: #e0e0e0;
+      }
+      #ui-root * {
+        pointer-events: auto;
+      }
+    </style>
+    <script type="module" crossorigin src="/YukiMedal/assets/index-D2aVASZh.js"></script>
+    <link rel="modulepreload" crossorigin href="/YukiMedal/assets/three-DI8yVzgj.js">
+    <link rel="modulepreload" crossorigin href="/YukiMedal/assets/rapier-DpxwuBBO.js">
+  <link rel="manifest" href="/YukiMedal/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/YukiMedal/registerSW.js"></script></head>
+  <body>
+    <div id="app">
+      <div id="ui-root"></div>
+    </div>
+  </body>
+</html>
