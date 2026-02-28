@@ -48,12 +48,100 @@
       #ui-root * {
         pointer-events: auto;
       }
+      /* Portrait mobile: show rotate overlay */
+      #rotate-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(ellipse at center, #1e1440 0%, #0a0614 100%);
+        z-index: 99999;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        color: #ffd700;
+        text-align: center;
+        pointer-events: all;
+        overflow: hidden;
+      }
+      #rotate-overlay .ro-title {
+        font-size: clamp(1rem, 5vw, 1.3rem);
+        letter-spacing: 0.2em;
+        font-weight: 900;
+        text-shadow: 0 0 16px #ffd700, 0 0 32px rgba(255,215,0,0.4);
+        animation: rotateGlow 2s ease-in-out infinite;
+      }
+      #rotate-overlay .ro-sub {
+        font-size: clamp(0.65rem, 3vw, 0.8rem);
+        color: #b090d0;
+        letter-spacing: 0.15em;
+      }
+      #rotate-overlay .ro-phone {
+        font-size: clamp(3rem, 14vw, 5rem);
+        animation: rotateHint 2s cubic-bezier(0.34,1.56,0.64,1) infinite;
+        filter: drop-shadow(0 0 12px rgba(255,215,0,0.5));
+      }
+      #rotate-overlay .ro-coin {
+        position: absolute;
+        border-radius: 50%;
+        border: 2px solid rgba(255,215,0,0.15);
+        animation: rotateCoinFloat linear infinite;
+        pointer-events: none;
+      }
+      #rotate-overlay .ro-arrow {
+        font-size: 1.4rem;
+        animation: arrowBounce 1s ease-in-out infinite;
+        color: rgba(255,215,0,0.7);
+      }
+      /* Only block portrait on small phones (< 600px wide).
+         Tablets (≥600px) can play in portrait — the 3D view still works. */
+      @media screen and (orientation: portrait) and (max-width: 599px) {
+        #rotate-overlay { display: flex; }
+      }
+      @keyframes rotateHint {
+        0%,100% { transform: rotate(0deg); }
+        50%      { transform: rotate(90deg); }
+      }
+      @keyframes rotateGlow {
+        0%,100% { text-shadow: 0 0 12px #ffd700, 0 0 24px rgba(255,215,0,0.3); }
+        50%      { text-shadow: 0 0 24px #ffd700, 0 0 48px rgba(255,215,0,0.5), 0 0 64px rgba(255,215,0,0.2); }
+      }
+      @keyframes rotateCoinFloat {
+        from { transform: translateY(110vh) rotate(0deg); }
+        to   { transform: translateY(-20vh) rotate(360deg); }
+      }
+      @keyframes arrowBounce {
+        0%,100% { transform: translateX(0); }
+        50%      { transform: translateX(6px); }
+      }
     </style>
-    <script type="module" crossorigin src="/YukiMedal/assets/index-DCDGc8pc.js"></script>
-    <link rel="modulepreload" crossorigin href="/YukiMedal/assets/three-_RpRzb1S.js">
+    <script type="module" crossorigin src="/YukiMedal/assets/index-B2I5MTLf.js"></script>
+    <link rel="modulepreload" crossorigin href="/YukiMedal/assets/three-CzJWjZO5.js">
     <link rel="modulepreload" crossorigin href="/YukiMedal/assets/rapier-DpxwuBBO.js">
   <link rel="manifest" href="/YukiMedal/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/YukiMedal/registerSW.js"></script></head>
   <body>
+    <div id="rotate-overlay">
+      <!-- Floating coin decorations (injected by JS below) -->
+      <div class="ro-phone">📱</div>
+      <div class="ro-arrow">➜</div>
+      <div class="ro-title">ROTATE DEVICE</div>
+      <div class="ro-sub">Landscape mode recommended</div>
+    </div>
+    <script>
+      (function() {
+        const overlay = document.getElementById('rotate-overlay');
+        for (let i = 0; i < 10; i++) {
+          const c = document.createElement('div');
+          c.className = 'ro-coin';
+          const sz = 20 + Math.random() * 40;
+          const left = Math.random() * 100;
+          const dur = 6 + Math.random() * 8;
+          const delay = -(Math.random() * dur);
+          c.style.cssText = `width:${sz}px;height:${sz}px;left:${left}%;bottom:-${sz}px;animation-duration:${dur}s;animation-delay:${delay}s;`;
+          overlay.appendChild(c);
+        }
+      })();
+    </script>
     <div id="app">
       <div id="ui-root"></div>
     </div>
